@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Generate New Token
-/home/mwilliamson/AWS/SAML-to-IAM/samlapi_formauth_adfs3.py
+/home/mwilliamson/aws-tools/SAML-to-IAM/samlapi_formauth_adfs3.py
 
 # Install new token
 cp /home/mwilliamson/.aws/credentials /home/users/mwilliamson/.aws/credentials
