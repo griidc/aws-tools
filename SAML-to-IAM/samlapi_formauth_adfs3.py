@@ -21,34 +21,19 @@ from urlparse import urlparse, urlunparse
 
 ##########################################################################
 # Variables
-
-# region: The default AWS region that this script will connect
-# to for all API calls
 region = 'us-east-1'
-
-# output format: The AWS CLI output format that will be configured in the
-# saml profile (affects subsequent CLI calls)
 outputformat = 'json'
-
-# awsconfigfile: The file where this script will store the temp
-# credentials under the saml profile
-awsconfigfile = '/.aws/credentials'
-
-# SSL certificate verification: Whether or not strict certificate
-# verification is done, False should only be used for dev/test
 sslverification = True
+tokenDuration = 43200
 
-# idpentryurl: The initial url that starts the authentication process.
+awsconfigfile = '/.aws/credentials'
+awsauthfile = '/home/ec2-user/aws-auth.ini'
 idpentryurl = 'https://sts.tamucc.edu/adfs/ls/IdpInitiatedSignon.aspx?loginToRp=urn:amazon:webservices'
-
-# Uncomment to enable low level debugging
-#logging.basicConfig(level=logging.DEBUG)
-
 ##########################################################################
 
 # Get the federated credentials from the aws-auth.ini file.
 config = ConfigParser.ConfigParser()
-config.read('aws-auth.ini')
+config.read(awsauthfile)
 username = config.get('AWSServiceAccount', 'username')
 password = config.get('AWSServiceAccount', 'password')
 
@@ -180,8 +165,7 @@ else:
 
 # Use the assertion to get an AWS STS token using Assume Role with SAML
 conn = boto.sts.connect_to_region(region)
-token = conn.assume_role_with_saml(role_arn, principal_arn, assertion, None, 43200)
-#token = conn.assume_role_with_saml(role_arn, principal_arn, assertion, None, 900)
+token = conn.assume_role_with_saml(role_arn, principal_arn, assertion, None, tokenDuration)
 
 # Write the AWS STS token into the AWS credential file
 home = expanduser("~")
@@ -212,14 +196,3 @@ print 'Note that it will expire at {0}.'.format(token.credentials.expiration)
 print 'After this time, you may safely rerun this script to refresh your access key pair.'
 print 'To use this credential, call the AWS CLI with the --profile option (e.g. aws --profile saml ec2 describe-instances).'
 print '----------------------------------------------------------------\n\n'
-
-# Use the AWS STS token to list all of the S3 buckets
-s3conn = boto.s3.connect_to_region(region,
-                     aws_access_key_id=token.credentials.access_key,
-                     aws_secret_access_key=token.credentials.secret_key,
-                     security_token=token.credentials.session_token)
-
-buckets = s3conn.get_all_buckets()
-
-print 'Simple API example listing all S3 buckets:'
-print(buckets)

@@ -1,3 +1,3 @@
-[SAML]
-username = 'domain\\account'
-password = 'secret'
+[AWSServiceAccount]
+username = domain\account
+password = secret
