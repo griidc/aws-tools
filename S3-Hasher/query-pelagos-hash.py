@@ -9,7 +9,7 @@ import re
 
 udi = sys.argv[1]
 
-# Convert S3 filenames to Pelagos UDI (with the stupid : symbol, smh.)
+# Convert S3 filenames to Pelagos UDI (Sidenote: The colon ':' not supported by S3.)
 udi = re.sub('^.*\/', '', udi)
 udi = re.sub('.dat$', '', udi)
 udi = re.sub(
