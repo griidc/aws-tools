@@ -6,7 +6,7 @@ key = sys.argv[1]
 sha256 = sys.argv[2]
 bucket = 'tamucc.griidc'
 
-session = boto3.Session(profile_name='saml')
+session = boto3.Session(profile_name='s3-util')
 client = session.client('s3')
 
 response = client.put_object_tagging(
