@@ -11,6 +11,10 @@ calculatedHash=$(/usr/bin/aws s3 --profile=s3-util --region=us-east-1 cp s3://ta
 if [ "$expectedHash" == "$calculatedHash" ]; then
     echo "$1 PASSED Validation. Tagging for Glacier Storage."
     $(./tag-glacier.py "$file" "$calculatedHash")
+    # shut down the instance (can be configured to auto-terminate on launch panel)
+    sleep 60
+    sudo /sbin/shutdown -h now
 else
+    # Instance stays running and displays this error if hash does not succeed.
     echo "ERROR: $1 FAILED Validation.\rExpected ($expectedHash). Got: ($calculatedHash)."
 fi

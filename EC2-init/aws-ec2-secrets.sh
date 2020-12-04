@@ -14,13 +14,5 @@
 # forwarding is place for authentication to
 # that account.
 
-echo "yes" | scp mwilliamson@poseidon.tamucc.edu:/home/users/mwilliamson/aws-secrets.tar.bz2 .
+echo "yes" | scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null mwilliamson@griidc-prod.tamucc.edu:/home/users/mwilliamson/aws-secrets.tar.bz2 .
 tar xfvj aws-secrets.tar.bz2
-
-# Generated initial Token
-#/home/ec2-user/aws-tools/SAML-to-IAM/samlapi_formauth_adfs3.py
-
-# Cron re-generation of token every 4 hrs
-#(crontab -l 2>/dev/null; echo "0 0,4,8,12,16,20 * * * /home/ec2-user/aws-tools/SAML-to-IAM/samlapi_formauth_adfs3.py") | crontab -
-
-
