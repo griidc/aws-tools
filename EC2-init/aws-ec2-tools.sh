@@ -13,4 +13,4 @@ sudo make install
 
 # Add Pelagos aws-tool repo
 cd ~
-echo "yes" | git clone git@github.com:griidc/aws-tools.git
+echo "yes" | git clone https://github.com/griidc/aws-tools.git
