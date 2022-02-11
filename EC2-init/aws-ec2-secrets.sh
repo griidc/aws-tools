@@ -14,5 +14,5 @@
 # forwarding is place for authentication to
 # that account.
 
-echo "yes" | scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null mwilliamson@griidc-prod.tamucc.edu:/home/users/mwilliamson/aws-secrets.tar.bz2 .
+echo "yes" | scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null mwilliamson.admin@griidc-prod.tamucc.edu:/home/mwilliamson.admin/aws-secrets.tar.bz2 .
 tar xfvj aws-secrets.tar.bz2
