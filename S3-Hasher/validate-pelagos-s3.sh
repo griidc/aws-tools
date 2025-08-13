@@ -1,5 +1,5 @@
 #!/bin/bash
-#Get key (EC3 file) from CLI 1st arg
+#Get key (S3 file) from CLI 1st arg
 file=$1
 
 #Get expected hash from CLI 2nd arg
