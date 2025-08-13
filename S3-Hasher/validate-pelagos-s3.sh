@@ -1,8 +1,9 @@
 #!/bin/bash
+# Get key (S3 file) from CLI 1st arg
 file=$1
 
-#Get expected hash from Pelagos
-expectedHash=$(./query-pelagos-hash.py "$file")
+# Get expected hash from CLI 2nd arg
+expectedHash=$2
 
 # Calculate hash from S3
 echo "Accessing via S3 cp request"
