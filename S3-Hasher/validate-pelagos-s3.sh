@@ -2,7 +2,7 @@
 # Get key (S3 file) from CLI 1st arg
 file=$1
 
-#Get expected hash from CLI 2nd arg
+# Get expected hash from CLI 2nd arg
 expectedHash=$2
 
 # Calculate hash from S3
